@@ -3,10 +3,14 @@ pragma solidity ^0.8.0;
 
 /* Problem 1 Interface & Contract */
 contract StudentV1 {
-    // Note: You can declare some state variable
+    uint256 private _count;
 
     function register() external returns (uint256) {
-        // TODO: please add your implementaiton here
+        if (_count > 0) {
+            return 123;
+        }
+         _count++;
+        return 11000;
     }
 }
 
@@ -16,14 +20,23 @@ interface IClassroomV2 {
 }
 
 contract StudentV2 {
+    uint256 private _count;
+
     function register() external view returns (uint256) {
-        // TODO: please add your implementaiton here
+        IClassroomV2 classroom = IClassroomV2(msg.sender);
+        if (classroom.isEnrolled() == false) {
+            return 11000;
+        }
+        return 123;
     }
 }
 
 /* Problem 3 Interface & Contract */
 contract StudentV3 {
     function register() external view returns (uint256) {
-        // TODO: please add your implementaiton here
+        if (gasleft() < 7000) {
+            return 123;
+        }
+        return 11000;
     }
 }
